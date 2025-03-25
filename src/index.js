@@ -1,4 +1,6 @@
 import WeatherSerivce from "./classes/WeatherService";
+import "./styles.css";
+import "./css-reset.css";
 
 /**
  * Front Door Script.

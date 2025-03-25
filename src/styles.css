@@ -1,0 +1,57 @@
+/* Base styles */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+body {
+  background-image: url(./img/bg-img2.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Layout styles */
+
+body {
+  display: grid;
+  grid-template-rows: 1fr 8fr 1fr;
+}
+
+header {
+  padding: 15px;
+  grid-row: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.search-form {
+  grid-column: 2;
+  justify-self: end;
+}
+
+main {
+  grid-row: 2;
+  display: grid;
+  grid-template-columns: 4fr 6fr;
+}
+
+.weather-data-container {
+  height: 600px;
+  width: 500px;
+  padding: 15px;
+  grid-column: 1;
+  justify-self: center;
+  align-self: center;
+  outline: 2px red solid;
+}
+
+/* Component styles */
+
+/* State styles */
+
+/* Utility classes */
+
+/* Media queries */
