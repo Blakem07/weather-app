@@ -51,7 +51,7 @@ To run this project locally, you’ll need the following:
 3. Install the required dependencies (if any):
 
    ```bash
-   npm install
+   npm install dotenv
    ```
 
 4. Create a `.env` file in the root of the project and store your API keys there:
