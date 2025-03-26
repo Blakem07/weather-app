@@ -1,4 +1,24 @@
 /* Base styles */
+:root {
+  --primary-color: white;
+  --secondary-color: #000000;
+
+  --font-size-base: 16px;
+  --font-size-lg: 24px;
+  --font-size-sm: 14px;
+
+  --font-size-h1: 3rem;
+  --font-size-h2: 2.5rem;
+  --font-size-h3: 2rem;
+  --font-size-h4: 2rem;
+  --font-size-h5: 1.5rem;
+  --font-size-h6: 1.25rem;
+
+  --font-size-button: 1rem;
+  --font-size-button-large: 1.5rem;
+  --font-size-button-small: 0.875rem;
+}
+
 html,
 body {
   height: 100%;
@@ -11,6 +31,23 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  color: var(--primary-color);
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+}
+
+h3 {
+  font-size: var(--font-size-h3);
+}
+
+h4 {
+  font-size: var(--font-size-h4);
 }
 
 /* Layout styles */
@@ -38,14 +75,30 @@ main {
   grid-template-columns: 4fr 6fr;
 }
 
-.weather-data-container {
+div.weather-data-container {
   height: 600px;
   width: 500px;
-  padding: 15px;
+  padding: 25px;
   grid-column: 1;
   justify-self: center;
   align-self: center;
   outline: 2px red solid;
+  display: flex;
+  flex-direction: column;
+}
+
+p.metric-main {
+  font-size: 200px;
+}
+
+div.metric-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+p.metric-secondary {
+  font-size: 30px;
 }
 
 /* Component styles */
