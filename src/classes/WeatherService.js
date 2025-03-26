@@ -8,7 +8,7 @@ class WeatherService {
   /**
    * Fetch Weather Data Method.
    *
-   * This fetches weather data from the Visual Crossing API based on a location inputted by the user.
+   * Fetches weather data from the Visual Crossing API based on a location inputted by the user.
    */
   fetchWeatherData(location) {
     if (!location) {
@@ -32,7 +32,6 @@ class WeatherService {
         if (!data.days || !data.resolvedAddress) {
           throw new Error("No data found.");
         }
-        console.log(data.resolvedAddress);
         console.log(data.days[0]);
       })
       .catch((error) => {

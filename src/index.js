@@ -1,4 +1,5 @@
 import WeatherSerivce from "./classes/WeatherService";
+import WeatherUIController from "./classes/WeatherUIController";
 import "./css-reset.css";
 import "./styles.css";
 
@@ -9,4 +10,5 @@ import "./styles.css";
  */
 
 const weatherService = new WeatherSerivce();
-weatherService.fetchWeatherData();
+const weatherUIController = new WeatherUIController(weatherService);
+// weatherService.fetchWeatherData();
