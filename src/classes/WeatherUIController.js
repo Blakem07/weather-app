@@ -41,7 +41,7 @@ class WeatherUIController {
     const location = this.userInputEle.value;
     const weatherData = await this.weatherService.fetchWeatherData(location);
     this.renderWeatherData(weatherData);
-    console.log(weatherData);
+    this.userInputEle.value = "";
   }
 
   /**
@@ -51,11 +51,17 @@ class WeatherUIController {
    * as an argument.
    */
   renderWeatherData(data) {
+    if (!data || typeof data !== "object") {
+      console.error("Invalid weather data provided:", data);
+      return;
+    }
+
     this.locationEle.textContent = data.location;
     this.conditionsEle.textContent = data.conditions;
     this.temperatureEle.textContent = `${data.temperature}`;
-    this.feelsLikeEle.textContent = `${data.feelsLike}°C`;
-    this.humidityEle.textContent = `${data.humidity}%`;
+    this.feelsLikeEle.textContent = `Feels Like: ${data.feelsLike}°C`;
+    this.windEle.textContent = `Wind: ${data.windSpeed} MPH`;
+    this.humidityEle.textContent = `Humidity: ${data.humidity}%`;
   }
 }
 

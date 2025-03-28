@@ -4,10 +4,15 @@ import "./css-reset.css";
 import "./styles.css";
 
 /**
- * Front Door Script.
+ * Entry point for the weather application.
  *
- * Requests to the API will be made from here.
+ * Initializes the WeatherService and WeatherUIController,
+ * then fetches and renders weather data.
  */
 
 const weatherService = new WeatherSerivce();
 const weatherUIController = new WeatherUIController(weatherService);
+
+weatherUIController.renderWeatherData(
+  await weatherService.fetchWeatherData("London")
+);
