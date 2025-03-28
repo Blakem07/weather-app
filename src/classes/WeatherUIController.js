@@ -16,7 +16,7 @@ class WeatherUIController {
     this.userInputEle = document.querySelector("#user-input");
     this.conditionsEle = document.querySelector("#conditions");
     this.locationEle = document.querySelector("#location");
-    this.temperatureEle = document.querySelector("#temperature");
+    this.temperatureEle = document.querySelector("#main-temp");
     this.feelsLikeEle = document.querySelector("#feels-like");
     this.windEle = document.querySelector("#wind-data");
     this.humidityEle = document.querySelector("#humidity-data");
@@ -40,7 +40,22 @@ class WeatherUIController {
     event.preventDefault(event);
     const location = this.userInputEle.value;
     const weatherData = await this.weatherService.fetchWeatherData(location);
+    this.renderWeatherData(weatherData);
     console.log(weatherData);
+  }
+
+  /**
+   * Render Weather Data Method.
+   *
+   * Updates the UI with the using a filtered weather data object passed to it
+   * as an argument.
+   */
+  renderWeatherData(data) {
+    this.locationEle.textContent = data.location;
+    this.conditionsEle.textContent = data.conditions;
+    this.temperatureEle.textContent = `${data.temperature}`;
+    this.feelsLikeEle.textContent = `${data.feelsLike}°C`;
+    this.humidityEle.textContent = `${data.humidity}%`;
   }
 }
 

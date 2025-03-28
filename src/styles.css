@@ -76,25 +76,41 @@ main {
 }
 
 div.weather-data-container {
+  backdrop-filter: blur(2px);
+  border-radius: 15px;
   height: 600px;
-  width: 500px;
-  padding: 25px;
+  width: 800px;
+  padding: 80px;
   grid-column: 1;
   justify-self: center;
   align-self: center;
-  outline: 2px red solid;
   display: flex;
   flex-direction: column;
 }
 
-p.metric-main {
-  font-size: 200px;
+.temp-container {
+  display: flex;
+  align-items: flex-start; /* Align °C to the top */
+  gap: 4px; /* Small spacing between number and °C */
+}
+
+.temp {
+  font-size: 10rem; /* Larger temp */
+  font-weight: bold;
+  line-height: 1; /* Prevent extra vertical spacing */
+}
+
+.unit {
+  font-size: 1.5rem; /* Smaller °C */
+  position: relative;
+  top: 2px; /* Moves °C slightly higher */
 }
 
 div.metric-container {
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 20px;
 }
 
 p.metric-secondary {

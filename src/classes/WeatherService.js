@@ -27,7 +27,7 @@ class WeatherService {
 
     try {
       const response = await fetch(
-        `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${encodedLocation}?&key=${process.env.VISUAL_CROSSING_API_KEY}`
+        `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${encodedLocation}?&key=${process.env.VISUAL_CROSSING_API_KEY}&unitGroup=uk`
       );
 
       if (!response.ok) {
@@ -40,7 +40,14 @@ class WeatherService {
         throw new Error("No data found.");
       }
 
-      return data.days[0];
+      return {
+        location: data.resolvedAddress,
+        temperature: data.days[0].temp,
+        conditions: data.days[0].conditions,
+        feelsLike: data.days[0].feelslike,
+        windSpeed: data.days[0].windspeed,
+        humidity: data.days[0].humidity,
+      };
     } catch (error) {
       console.log(`Error: ${error.message}`);
     }
