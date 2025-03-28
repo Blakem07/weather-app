@@ -33,11 +33,14 @@ class WeatherUIController {
    *
    * Passes the location inputted by the user as an argument to the
    * the weather services fetch weather data method.
+   *
+   * This method is async as it is a wrapper for weatherService.fetchWeatherData().
    */
-  handleFormSubmit(event) {
+  async handleFormSubmit(event) {
     event.preventDefault(event);
     const location = this.userInputEle.value;
-    this.weatherService.fetchWeatherData(location);
+    const weatherData = await this.weatherService.fetchWeatherData(location);
+    console.log(weatherData);
   }
 }
 

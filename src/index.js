@@ -11,4 +11,3 @@ import "./styles.css";
 
 const weatherService = new WeatherSerivce();
 const weatherUIController = new WeatherUIController(weatherService);
-// weatherService.fetchWeatherData();
