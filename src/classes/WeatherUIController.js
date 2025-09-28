@@ -5,8 +5,10 @@
  * that it recieves and event handling.
  */
 class WeatherUIController {
-  constructor(weatherService) {
+  constructor(weatherService, weatherVideos) {
     this.weatherService = weatherService;
+    this.weatherVideos = weatherVideos;
+
     this.initDOMElements();
     this.initEventHandlers();
   }
@@ -20,6 +22,8 @@ class WeatherUIController {
     this.feelsLikeEle = document.querySelector("#feels-like");
     this.windEle = document.querySelector("#wind-data");
     this.humidityEle = document.querySelector("#humidity-data");
+
+    this.bgVideo = document.getElementById("background-video");
   }
 
   initEventHandlers() {
@@ -56,12 +60,41 @@ class WeatherUIController {
       return;
     }
 
+    this.setBackgroundVideo(data.conditions);
+
     this.locationEle.textContent = data.location;
     this.conditionsEle.textContent = data.conditions;
     this.temperatureEle.textContent = `${data.temperature}`;
     this.feelsLikeEle.textContent = `Feels Like: ${data.feelsLike}°C`;
     this.windEle.textContent = `Wind: ${data.windSpeed} MPH`;
     this.humidityEle.textContent = `Humidity: ${data.humidity}%`;
+  }
+
+  /**
+   * Sets the background video based on the given weather conditions.
+   *
+   * Extracts a keyword (e.g., "rain", "sun", "snow", "cloud") from the conditions string
+   * using a regular expression. It then looks up the corresponding video from the
+   * `weatherVideos` map and sets it as the source of the background video element.
+   * If no match is found, it defaults to the "default" video.
+   *
+   * @param {string} conditions - A string describing the current weather conditions.
+   *                              Example: "light rain", "sunny", "snow showers".
+   * @returns {string} The selected video path from `weatherVideos`,
+   *
+   */
+  setBackgroundVideo(conditions) {
+    if (!conditions) {
+      return;
+    }
+
+    const regex = /(rain|sun|snow|cloud)/i;
+    const match = conditions.match(regex);
+    const key = match ? match[0].toLowerCase() : "default";
+
+    this.bgVideo.src = this.weatherVideos[key];
+
+    return this.weatherVideos[key] || this.weatherVideos["default"];
   }
 }
 

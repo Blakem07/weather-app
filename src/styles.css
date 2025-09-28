@@ -112,6 +112,17 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+#background-video {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+
+  z-index: -1;
+  object-fit: cover; /* cover the area, crop if needed */
+}
+
 header,
 footer {
   flex: 0 0 auto; /* Do not grow/shrink, keep natural height */
