@@ -21,16 +21,16 @@
 
   --shadow: #595959;
 
-  --font-size-base: 16px;
-  --font-size-lg: 24px;
-  --font-size-sm: 14px;
-
-  --font-size-h1: 3rem;
-  --font-size-h2: 2.5rem;
-  --font-size-h3: 2rem;
-  --font-size-h4: 2rem;
-  --font-size-h5: 1.5rem;
-  --font-size-h6: 1.25rem;
+  --font-size-xs: 0.75rem; /* 12px */
+  --font-size-sm: 0.875rem; /* 14px */
+  --font-size-md: 1rem; /* 16px (base) */
+  --font-size-lg: 1.125rem; /* 18px */
+  --font-size-xl: 1.25rem; /* 20px */
+  --font-size-2xl: 1.5rem; /* 24px */
+  --font-size-3xl: 1.875rem; /* 30px */
+  --font-size-4xl: 2.25rem; /* 36px */
+  --font-size-5xl: 3rem; /* 48px */
+  --font-size-6xl: 4rem; /* 64px */
 
   --font-size-button: 1rem;
   --font-size-button-large: 1.5rem;
@@ -61,7 +61,7 @@ body {
 
 h1 {
   font-family: Designer;
-  font-size: var(--font-size-h1);
+  font-size: var(--font-size-5xl);
 }
 
 h2 {
@@ -70,7 +70,7 @@ h2 {
 
 h3 {
   font-family: CaviarDreams;
-  font-size: var(--font-size-h3);
+  font-size: var(--font-size-4xl);
 }
 
 h4 {
@@ -82,7 +82,6 @@ p {
 }
 
 span {
-  font-size: 1px;
   font-family: DeepShadow;
 }
 
@@ -241,3 +240,14 @@ p.metric-secondary {
    Media queries 
 
    ========================================================================== */
+
+@media (max-width: 425px) {
+  div.metric-container {
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  #main-temp {
+    font-size: var(--font-size-5xl);
+  }
+}
