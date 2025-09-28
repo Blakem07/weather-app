@@ -125,7 +125,7 @@ body {
 header,
 footer {
   flex: 0 0 auto; /* Do not grow/shrink, keep natural height */
-  min-height: 60px; /* Minimum height for small screens */
+  min-height: 150px; /* Minimum height for small screens */
 }
 
 header {
@@ -223,11 +223,55 @@ p.metric-secondary {
 
    ========================================================================== */
 
+.search-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.5rem;
+
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 12px;
+
+  padding: 0.5rem 1rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+#user-input {
+  width: 100%;
+  max-width: 300px;
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  color: #ffffff;
+
+  box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+
+  font-family: CaviarDreams;
+}
+
 /* ========================================================================== 
 
    State styles 
 
    ========================================================================== */
+
+#user-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+#user-input:focus {
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+}
 
 /* ========================================================================== 
 
