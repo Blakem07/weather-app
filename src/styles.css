@@ -87,8 +87,8 @@ span {
 
 h1,
 h3,
-span,
-p {
+.metric-container span,
+.metric-container p {
   color: white;
   /* offset-x | offset-y | blur-radius | color */
   text-shadow: 3px 3px 1px black;
@@ -176,13 +176,11 @@ main {
   color: #ffffff; /* ensures text is readable over dark backgrounds */
 }
 
-h1,
-h3,
-span,
-p {
-  color: white;
-  text-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-  font-weight: bold;
+.description-container {
+  display: flex;
+  flex: 0 0 1;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .temp-container {
@@ -258,6 +256,65 @@ p.metric-secondary {
   font-family: CaviarDreams;
 }
 
+.switch {
+  flex-shrink: 0;
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide the default checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The track */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  border-radius: 34px;
+  transition: background-color 0.3s;
+}
+
+/* The circle (thumb) */
+.slider::before {
+  position: absolute;
+  content: "C"; /* Default is Celsius */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+  color: #000;
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  top: 4px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.3s, content 0.3s;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Checked state */
+.switch input:checked + .slider {
+  background-color: #ffe600;
+}
+
+/* Move the thumb and change text to "F" */
+.switch input:checked + .slider::before {
+  transform: translateX(26px);
+  content: "F";
+}
+
 /* ========================================================================== 
 
    State styles 
@@ -293,5 +350,11 @@ p.metric-secondary {
 
   #main-temp {
     font-size: var(--font-size-5xl);
+  }
+}
+
+@media (max-width: 320px) {
+  .weather-header h3 {
+    font-size: var(--font-size-2xl);
   }
 }
