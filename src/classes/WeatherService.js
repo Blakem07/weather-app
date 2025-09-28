@@ -22,7 +22,6 @@ class WeatherService {
       location = "London";
     }
 
-    // URL encoding to handle special characters properly.
     const encodedLocation = encodeURIComponent(location);
 
     try {
@@ -41,7 +40,7 @@ class WeatherService {
       }
 
       return {
-        location: data.resolvedAddress,
+        location: this.cleanResolvedAddress(data.resolvedAddress),
         temperature: data.days[0].temp,
         conditions: data.days[0].conditions,
         feelsLike: data.days[0].feelslike,
@@ -51,6 +50,35 @@ class WeatherService {
     } catch (error) {
       console.log(`Error: ${error.message}`);
     }
+  }
+
+  /**
+   * Cleans a resolved address string by removing unwanted parts such as zip codes,
+   * numeric coordinates, or very short segments, then returns a simplified location string.
+   *
+   * It returns the last two parts joined by a comma, typically representing
+   * a simplified location like "City, Country" or "Region, Country".
+   *
+   * @param {string} address - The full resolved address string to clean.
+   * @returns {string} A cleaned, simplified location string.
+   */
+  cleanResolvedAddress(address) {
+    if (!address) return "";
+
+    const parts = address
+      .split(",")
+      .map((part) => part.trim())
+      .filter((part) => {
+        // Skip numeric-only parts (like zip codes) or very short segments
+        return (
+          part.length > 2 &&
+          !/^\d+$/.test(part) && // e.g., "12345"
+          !/^-?\d+(\.\d+)?$/.test(part) // e.g., "45.123" or "-73.456"
+        );
+      });
+
+    // Return the last 2 or 3 parts (country + region, or city + country, etc.)
+    return parts.slice(-2).join(", ");
   }
 }
 
