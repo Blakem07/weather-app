@@ -1,4 +1,3 @@
-/* Base styles */
 :root {
   --primary-color: white;
   --secondary-color: #000000;
@@ -18,6 +17,12 @@
   --font-size-button-large: 1.5rem;
   --font-size-button-small: 0.875rem;
 }
+
+/* ========================================================================== 
+
+   Base styles 
+
+   ========================================================================== */
 
 html,
 body {
@@ -50,42 +55,62 @@ h4 {
   font-size: var(--font-size-h4);
 }
 
-/* Layout styles */
+/* ========================================================================== 
+
+   Layout styles 
+
+   ========================================================================== */
 
 body {
-  display: grid;
-  grid-template-rows: 1fr 8fr 1fr;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+
+  -webkit-font-smoothing: antialiased; /*Improves appearance of white font*/
+  -moz-osx-font-smoothing: grayscale;
+}
+
+header,
+footer {
+  flex: 0 0 auto; /* Do not grow/shrink, keep natural height */
+  min-height: 60px; /* Minimum height for small screens */
 }
 
 header {
-  padding: 15px;
-  grid-row: 1;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  padding: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .search-form {
-  grid-column: 2;
   justify-self: end;
 }
 
+/*HEADER ----------------------------------------------------------------------------------------*/
+
 main {
-  grid-row: 2;
-  display: grid;
-  grid-template-columns: 4fr 6fr;
+  display: flex;
+
+  height: auto;
+  width: 100%;
+
+  flex: 1 0 auto; /* Grow to fill remaining space */
+  overflow-y: auto; /* Scroll if content overflows */
+
+  align-items: center;
+  justify-content: center;
 }
 
-div.weather-data-container {
-  backdrop-filter: blur(2px);
-  border-radius: 15px;
-  height: 600px;
-  width: 800px;
-  padding: 80px;
-  grid-column: 1;
-  justify-self: center;
-  align-self: center;
+.weather-data-container {
   display: flex;
   flex-direction: column;
+  height: auto;
+  width: 50%;
+
+  backdrop-filter: blur(2.5px);
+  border-radius: 15px;
 }
 
 .temp-container {
@@ -108,7 +133,6 @@ div.weather-data-container {
 
 div.metric-container {
   display: flex;
-  justify-content: center;
   align-items: center;
   gap: 20px;
   margin-top: 40px;
@@ -118,10 +142,28 @@ p.metric-secondary {
   font-size: 30px;
 }
 
-/* Component styles */
+/*MAIN ----------------------------------------------------------------------------------------*/
 
-/* State styles */
+/* ========================================================================== 
 
-/* Utility classes */
+   Component styles 
 
-/* Media queries */
+   ========================================================================== */
+
+/* ========================================================================== 
+
+   State styles 
+
+   ========================================================================== */
+
+/* ========================================================================== 
+
+   Utility classes 
+
+   ========================================================================== */
+
+/* ========================================================================== 
+
+   Media queries 
+
+   ========================================================================== */
