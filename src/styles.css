@@ -1,6 +1,25 @@
+@font-face {
+  font-family: Designer;
+  src: url("./font/Designer.otf");
+}
+
+@font-face {
+  font-family: CaviarDreams;
+  src: url("./font/CaviarDreams.ttf");
+}
+
+@font-face {
+  font-family: DeepShadow;
+  src: url("./font/DeepShadow.ttf");
+}
+
 :root {
   --primary-color: white;
   --secondary-color: #000000;
+
+  --whitesmoke: #f5f5f5;
+
+  --shadow: #595959;
 
   --font-size-base: 16px;
   --font-size-lg: 24px;
@@ -36,10 +55,12 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  color: var(--primary-color);
+
+  color: var(--secondary-color);
 }
 
 h1 {
+  font-family: Designer;
   font-size: var(--font-size-h1);
 }
 
@@ -48,11 +69,31 @@ h2 {
 }
 
 h3 {
+  font-family: CaviarDreams;
   font-size: var(--font-size-h3);
 }
 
 h4 {
   font-size: var(--font-size-h4);
+}
+
+p {
+  font-family: CaviarDreams;
+}
+
+span {
+  font-size: 1px;
+  font-family: DeepShadow;
+}
+
+h1,
+h3,
+span,
+p {
+  color: white;
+  /* offset-x | offset-y | blur-radius | color */
+  text-shadow: 3px 3px 1px black;
+  font-weight: bold;
 }
 
 /* ========================================================================== 
@@ -104,23 +145,45 @@ main {
 }
 
 .weather-data-container {
+  height: auto;
+
   display: flex;
   flex-direction: column;
-  height: auto;
-  width: 50%;
+  padding: 2rem;
 
-  backdrop-filter: blur(2.5px);
-  border-radius: 15px;
+  /* Frosted glass effect */
+  background: rgba(255, 255, 255, 0.1); /* semi-transparent white */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 20px;
+
+  /* Soft shadows for depth */
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+
+  /* Smooth appearance on all devices */
+  transition: all 0.3s ease;
+  color: #ffffff; /* ensures text is readable over dark backgrounds */
+}
+
+h1,
+h3,
+span,
+p {
+  color: white;
+  text-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  font-weight: bold;
 }
 
 .temp-container {
   display: flex;
+
   align-items: flex-start; /* Align °C to the top */
   gap: 4px; /* Small spacing between number and °C */
 }
 
 .temp {
-  font-size: 10rem; /* Larger temp */
+  font-size: 5rem; /* Larger temp */
   font-weight: bold;
   line-height: 1; /* Prevent extra vertical spacing */
 }
