@@ -156,7 +156,7 @@ main {
 
 .weather-data-container {
   height: auto;
-
+  visibility: hidden;
   display: flex;
   flex-direction: column;
   padding: 2rem;

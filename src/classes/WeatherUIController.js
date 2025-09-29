@@ -31,6 +31,7 @@ class WeatherUIController {
     this.windEle = document.querySelector("#wind-data");
     this.humidityEle = document.querySelector("#humidity-data");
 
+    this.isInitialLoad = true;
     this.loadingScreenEle = document.querySelector("#loading-screen");
     this.bgVideo = document.getElementById("background-video");
   }
@@ -49,12 +50,30 @@ class WeatherUIController {
     });
   }
 
+  /**
+   * Display the loading overlay while preparing weather data UI.
+   *
+   * - Shows the loading screen (`display: flex`).
+   * - Shows the weather container but hides its content (`visibility: hidden`) to
+   *   maintain layout stability and prevent content flash.
+   */
   showLoading() {
     this.loadingScreenEle.style.display = "flex";
+    this.weatherDataContainerEle.style.display = "flex"; // Reserve layout space
+    this.weatherDataContainerEle.style.visibility = "hidden"; // Hide content until ready
   }
 
+  /**
+   * Hide the loading overlay and reveal weather data.
+   *
+   * - Delays hiding the loading screen briefly to allow content to render.
+   * - Sets container visibility to visible for smooth reveal without layout shifts.
+   */
   hideLoading() {
-    this.loadingScreenEle.style.display = "none";
+    setTimeout(() => {
+      this.loadingScreenEle.style.display = "none";
+      this.weatherDataContainerEle.style.visibility = "visible";
+    }, 145);
   }
 
   /**
@@ -97,9 +116,9 @@ class WeatherUIController {
       return;
     }
 
-    this.showLoading();
-
-    this.currentWeatherData = data;
+    if (this.isInitialLoad) {
+      this.showLoading();
+    }
 
     // Smoothly update the background video based on weather conditions
     this.setBackgroundVideo(data.conditions);
@@ -126,6 +145,7 @@ class WeatherUIController {
     this.updateWithFade(this.humidityEle, `Humidity: ${data.humidity}%`);
 
     this.hideLoading();
+    this.isInitialLoad = false;
   }
 
   convertTemperature(tempCelsius, unit) {
