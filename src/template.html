@@ -15,12 +15,13 @@
         <input autocomplete="off" type="text" id="user-input" />
       </form>
     </header>
+
     <main>
       <div class="weather-data-container">
         <div class="description-container">
           <div class="weather-header">
-            <h3 id="conditions"></h3>
-            <h1 id="location"></h1>
+            <h3 id="conditions" class="fade-transition"></h3>
+            <h1 id="location" class="fade-transition"></h1>
           </div>
           <label class="switch">
             <input
@@ -31,18 +32,20 @@
             <span class="slider"></span>
           </label>
         </div>
+
         <div class="metric-container">
           <div class="temp-container">
-            <span id="main-temp" class="temp"></span>
+            <span id="main-temp" class="temp fade-transition"></span>
           </div>
           <div class="extra-data">
-            <p id="feels-like" class="metric-secondary"></p>
-            <p id="wind-data" class="metric-secondary"></p>
-            <p id="humidity-data" class="metric-secondary"></p>
+            <p id="feels-like" class="metric-secondary fade-transition"></p>
+            <p id="wind-data" class="metric-secondary fade-transition"></p>
+            <p id="humidity-data" class="metric-secondary fade-transition"></p>
           </div>
         </div>
       </div>
     </main>
+
     <footer></footer>
   </body>
 </html>

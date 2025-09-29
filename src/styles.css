@@ -324,6 +324,15 @@ p.metric-secondary {
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
 }
 
+.fade-transition {
+  transition: opacity 0.3s ease;
+  opacity: 1;
+}
+
+.fade-transition.fade-out {
+  opacity: 0;
+}
+
 /* ========================================================================== 
 
    Utility classes 

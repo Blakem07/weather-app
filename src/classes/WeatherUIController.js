@@ -85,7 +85,7 @@ class WeatherUIController {
       return;
     }
 
-    this.currentWeatherData = data; // Save for re-rendering
+    this.currentWeatherData = data;
 
     this.setBackgroundVideo(data.conditions);
 
@@ -99,18 +99,43 @@ class WeatherUIController {
     );
     const unitLabel = this.temperatureUnit === "F" ? "°F" : "°C";
 
-    this.locationEle.textContent = data.location;
-    this.conditionsEle.textContent = data.conditions;
-    this.temperatureEle.textContent = `${temp.toFixed(1)}${unitLabel}`;
-    this.feelsLikeEle.textContent = `Feels Like: ${feelsLike.toFixed(
-      1
-    )}${unitLabel}`;
-    this.windEle.textContent = `Wind: ${data.windSpeed} MPH`;
-    this.humidityEle.textContent = `Humidity: ${data.humidity}%`;
+    this.updateWithFade(this.locationEle, data.location);
+    this.updateWithFade(this.conditionsEle, data.conditions);
+    this.updateWithFade(this.temperatureEle, `${temp.toFixed(1)}${unitLabel}`);
+    this.updateWithFade(
+      this.feelsLikeEle,
+      `Feels Like: ${feelsLike.toFixed(1)}${unitLabel}`
+    );
+    this.updateWithFade(this.windEle, `Wind: ${data.windSpeed} MPH`);
+    this.updateWithFade(this.humidityEle, `Humidity: ${data.humidity}%`);
   }
 
   convertTemperature(tempCelsius, unit) {
     return unit === "F" ? (tempCelsius * 9) / 5 + 32 : tempCelsius;
+  }
+
+  /**
+   * Updates a DOM element's text content with a smooth fade-out/fade-in effect.
+   *
+   * If the new text is different from the current text, this method applies a
+   * short "fade-out" class to animate the opacity, updates the content, and
+   * then removes the class to fade the element back in. This helps create a
+   * visually smooth UI experience during content changes.
+   *
+   * @param {HTMLElement} element - The DOM element to update.
+   * @param {string} newText - The new text content to display.
+   *
+   * @returns {void}
+   */
+  updateWithFade(element, newText) {
+    if (element.textContent === newText) return; // No change
+
+    element.classList.add("fade-out");
+
+    setTimeout(() => {
+      element.textContent = newText;
+      element.classList.remove("fade-out");
+    }, 150); // Half the duration of the CSS transition
   }
 
   /**
