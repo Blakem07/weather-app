@@ -31,6 +31,7 @@ class WeatherUIController {
     this.windEle = document.querySelector("#wind-data");
     this.humidityEle = document.querySelector("#humidity-data");
 
+    this.loadingScreenEle = document.querySelector("#loading-screen");
     this.bgVideo = document.getElementById("background-video");
   }
 
@@ -46,6 +47,14 @@ class WeatherUIController {
         this.renderWeatherData(this.currentWeatherData);
       }
     });
+  }
+
+  showLoading() {
+    this.loadingScreenEle.style.display = "flex";
+  }
+
+  hideLoading() {
+    this.loadingScreenEle.style.display = "none";
   }
 
   /**
@@ -88,6 +97,8 @@ class WeatherUIController {
       return;
     }
 
+    this.showLoading();
+
     this.currentWeatherData = data;
 
     // Smoothly update the background video based on weather conditions
@@ -113,6 +124,8 @@ class WeatherUIController {
     );
     this.updateWithFade(this.windEle, `Wind: ${data.windSpeed} MPH`);
     this.updateWithFade(this.humidityEle, `Humidity: ${data.humidity}%`);
+
+    this.hideLoading();
   }
 
   convertTemperature(tempCelsius, unit) {
