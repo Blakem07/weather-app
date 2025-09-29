@@ -20,6 +20,9 @@ class WeatherUIController {
     this.temperatureUnit = "C";
     this.currentWeatherData = null;
 
+    this.weatherDataContainerEle = document.querySelector(
+      ".weather-data-container"
+    );
     this.userInputEle = document.querySelector("#user-input");
     this.conditionsEle = document.querySelector("#conditions");
     this.locationEle = document.querySelector("#location");
@@ -87,6 +90,7 @@ class WeatherUIController {
 
     this.currentWeatherData = data;
 
+    // Smoothly update the background video based on weather conditions
     this.setBackgroundVideo(data.conditions);
 
     const temp = this.convertTemperature(
@@ -99,6 +103,7 @@ class WeatherUIController {
     );
     const unitLabel = this.temperatureUnit === "F" ? "°F" : "°C";
 
+    // Use your updateWithFade helper to update the UI with fade effects
     this.updateWithFade(this.locationEle, data.location);
     this.updateWithFade(this.conditionsEle, data.conditions);
     this.updateWithFade(this.temperatureEle, `${temp.toFixed(1)}${unitLabel}`);
@@ -139,7 +144,8 @@ class WeatherUIController {
   }
 
   /**
-   * Sets the background video based on the given weather conditions.
+   * Sets the background video based on the given weather conditions,
+   * fading out the old video and fading in the new one smoothly.
    *
    * Extracts a keyword (e.g., "rain", "sun", "snow", "cloud") from the conditions string
    * using a regular expression. It then looks up the corresponding video from the
@@ -148,8 +154,7 @@ class WeatherUIController {
    *
    * @param {string} conditions - A string describing the current weather conditions.
    *                              Example: "light rain", "sunny", "snow showers".
-   * @returns {string} The selected video path from `weatherVideos`,
-   *
+   * @returns {string} The selected video path from `weatherVideos`.
    */
   setBackgroundVideo(conditions) {
     if (!conditions) {
@@ -159,10 +164,28 @@ class WeatherUIController {
     const regex = /(rain|sun|snow|cloud)/i;
     const match = conditions.match(regex);
     const key = match ? match[0].toLowerCase() : "default";
+    const newSrc = this.weatherVideos[key] || this.weatherVideos["default"];
 
-    this.bgVideo.src = this.weatherVideos[key];
+    const video = this.bgVideo;
+    const source = video.querySelector("source");
+    const currentSrc = source.getAttribute("src");
 
-    return this.weatherVideos[key] || this.weatherVideos["default"];
+    if (currentSrc === newSrc) {
+      return newSrc;
+    }
+
+    video.classList.add("fade-out");
+
+    setTimeout(() => {
+      source.setAttribute("src", newSrc);
+      video.load();
+      video.play().catch((error) => {
+        console.warn("Video play was interrupted or blocked:", error);
+      });
+      video.classList.remove("fade-out");
+    }, 300);
+
+    return newSrc;
   }
 }
 
