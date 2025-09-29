@@ -17,7 +17,9 @@ This application uses the **Visual Crossing Weather API** to retrieve the weathe
 - 🎞️ **Dynamic Background**: The page appearance changes based on the weather data.
 - ⚙️ **Async/Await and Promises**: The app utilizes modern JavaScript techniques such as async/await and promises for handling API requests and ensuring smooth, non-blocking operations.
 
-## 🔐 API Keys, Secrets, and Security
+## 🚀 Live Demo
+
+👉 [Use Weather App](https://Blakem07.github.io/weather-app/)
 
 ### 🔑 API Key Management
 
@@ -79,7 +81,6 @@ To run this project locally, you’ll need the following:
 
 - **JavaScript (ES6+)**
 - **Visual Crossing Weather API**: To fetch weather data.
-- **Giphy API**: For fetching weather-related gifs.
 - **HTML/CSS**: To structure and style the website.
 - **Async/Await & Promises**: To handle asynchronous operations.
 
