@@ -389,6 +389,16 @@ p.metric-secondary {
 
    ========================================================================== */
 
+@media (max-width: 1024px) {
+  #conditions {
+    font-size: var(--font-size-3xl);
+  }
+
+  #location {
+    font-size: var(--font-size-4xl);
+  }
+}
+
 @media (max-width: 425px) {
   div.metric-container {
     flex-direction: column;
@@ -401,7 +411,11 @@ p.metric-secondary {
 }
 
 @media (max-width: 320px) {
-  .weather-header h3 {
+  #conditions {
+    font-size: var(--font-size-2xl);
+  }
+
+  #location {
     font-size: var(--font-size-2xl);
   }
 }
