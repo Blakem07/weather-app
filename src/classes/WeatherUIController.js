@@ -15,6 +15,11 @@ class WeatherUIController {
 
   initDOMElements() {
     this.locationFormEle = document.querySelector(".search-form");
+
+    this.unitToggle = document.querySelector("#unit-toggle");
+    this.temperatureUnit = "C";
+    this.currentWeatherData = null;
+
     this.userInputEle = document.querySelector("#user-input");
     this.conditionsEle = document.querySelector("#conditions");
     this.locationEle = document.querySelector("#location");
@@ -29,6 +34,14 @@ class WeatherUIController {
   initEventHandlers() {
     this.locationFormEle.addEventListener("submit", (event) => {
       this.handleFormSubmit(event);
+    });
+
+    // Re-render weather data on unit toggle
+    this.unitToggle.addEventListener("change", () => {
+      this.temperatureUnit = this.unitToggle.checked ? "F" : "C";
+      if (this.currentWeatherData) {
+        this.renderWeatherData(this.currentWeatherData);
+      }
     });
   }
 
@@ -49,10 +62,22 @@ class WeatherUIController {
   }
 
   /**
-   * Render Weather Data Method.
+   * Renders the weather data to the UI.
    *
-   * Updates the UI with the using a filtered weather data object passed to it
-   * as an argument.
+   * This method updates the DOM elements with the provided weather data,
+   * applying temperature conversions based on the currently selected unit
+   * (Celsius or Fahrenheit). It also stores the latest weather data internally
+   * to allow re-rendering when the unit is toggled.
+   *
+   * @param {Object} data - A filtered weather data object.
+   * @param {string} data.location - The name of the location.
+   * @param {string} data.conditions - Weather condition description (e.g., "Sunny").
+   * @param {number} data.temperature - Temperature in Celsius.
+   * @param {number} data.feelsLike - Feels-like temperature in Celsius.
+   * @param {number} data.windSpeed - Wind speed in MPH.
+   * @param {number} data.humidity - Humidity percentage.
+   *
+   * @returns {void}
    */
   renderWeatherData(data) {
     if (!data || typeof data !== "object") {
@@ -60,14 +85,32 @@ class WeatherUIController {
       return;
     }
 
+    this.currentWeatherData = data; // Save for re-rendering
+
     this.setBackgroundVideo(data.conditions);
+
+    const temp = this.convertTemperature(
+      data.temperature,
+      this.temperatureUnit
+    );
+    const feelsLike = this.convertTemperature(
+      data.feelsLike,
+      this.temperatureUnit
+    );
+    const unitLabel = this.temperatureUnit === "F" ? "°F" : "°C";
 
     this.locationEle.textContent = data.location;
     this.conditionsEle.textContent = data.conditions;
-    this.temperatureEle.textContent = `${data.temperature}`;
-    this.feelsLikeEle.textContent = `Feels Like: ${data.feelsLike}°C`;
+    this.temperatureEle.textContent = `${temp.toFixed(1)}${unitLabel}`;
+    this.feelsLikeEle.textContent = `Feels Like: ${feelsLike.toFixed(
+      1
+    )}${unitLabel}`;
     this.windEle.textContent = `Wind: ${data.windSpeed} MPH`;
     this.humidityEle.textContent = `Humidity: ${data.humidity}%`;
+  }
+
+  convertTemperature(tempCelsius, unit) {
+    return unit === "F" ? (tempCelsius * 9) / 5 + 32 : tempCelsius;
   }
 
   /**

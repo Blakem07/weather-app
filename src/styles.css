@@ -196,12 +196,6 @@ main {
   line-height: 1; /* Prevent extra vertical spacing */
 }
 
-.unit {
-  font-size: 1.5rem; /* Smaller °C */
-  position: relative;
-  top: 2px; /* Moves °C slightly higher */
-}
-
 div.metric-container {
   display: flex;
   align-items: center;
