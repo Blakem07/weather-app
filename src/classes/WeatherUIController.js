@@ -122,7 +122,6 @@ class WeatherUIController {
 
     this.currentWeatherData = data;
 
-    // Smoothly update the background video based on weather conditions
     this.setBackgroundVideo(data.conditions);
 
     const temp = this.convertTemperature(
@@ -135,7 +134,6 @@ class WeatherUIController {
     );
     const unitLabel = this.temperatureUnit === "F" ? "°F" : "°C";
 
-    // Use your updateWithFade helper to update the UI with fade effects
     this.updateWithFade(this.locationEle, data.location);
     this.updateWithFade(this.conditionsEle, data.conditions);
     this.updateWithFade(this.temperatureEle, `${temp.toFixed(1)}${unitLabel}`);
