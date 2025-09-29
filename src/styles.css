@@ -209,6 +209,40 @@ p.metric-secondary {
 
 /*MAIN ----------------------------------------------------------------------------------------*/
 
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.credits {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  color: var(--primary-color);
+  user-select: none;
+  font-size: 1.2rem;
+}
+
+.copyright {
+  text-shadow: 3px 3px 5px black;
+  font-family: Designer;
+}
+
+.github-mark {
+  height: 1.2rem;
+  width: 1.2rem;
+  place-self: center;
+  background: none;
+  border: none;
+  padding: 0;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border-radius: 15px;
+  box-shadow: 3px 5px 5px black;
+}
+
 /* ========================================================================== 
 
    Component styles 
@@ -417,5 +451,10 @@ p.metric-secondary {
 
   #location {
     font-size: var(--font-size-2xl);
+  }
+
+  .credits {
+    font-size: 1rem;
+    margin: 0px;
   }
 }

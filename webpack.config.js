@@ -38,6 +38,29 @@ module.exports = {
           filename: "videos/[hash][ext][query]",
         },
       },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: "asset/resource",
+        generator: {
+          filename: "img/[hash][ext][query]",
+        },
+      },
+      {
+        test: /\.html$/i,
+        loader: "html-loader",
+        options: {
+          sources: {
+            list: [
+              "...",
+              {
+                tag: "img",
+                attribute: "src",
+                type: "src",
+              },
+            ],
+          },
+        },
+      },
     ],
   },
 };

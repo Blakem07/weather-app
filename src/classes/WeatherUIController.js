@@ -120,6 +120,8 @@ class WeatherUIController {
       this.showLoading();
     }
 
+    this.currentWeatherData = data;
+
     // Smoothly update the background video based on weather conditions
     this.setBackgroundVideo(data.conditions);
 
